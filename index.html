@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="5;url=https://taten.org">
+    <title>正在跳转 - taten.org</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text-main: #171717;
+            --text-muted: #666666;
+            --accent: #0070f3; /* Vercel 蓝色强调色 */
+            --border: #eaeaea;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0a0a0a;
+                --text-main: #ededed;
+                --text-muted: #a0a0a0;
+                --border: #333333;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: var(--bg);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 420px;
+            padding: 2rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-box {
+            margin-bottom: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .domain-transition {
+            margin: 1.5rem 0;
+            padding: 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.85rem;
+        }
+
+        .old-domain { text-decoration: line-through; opacity: 0.6; }
+        .arrow { margin: 0 8px; color: var(--accent); }
+        .new-domain { font-weight: 600; color: var(--text-main); }
+
+        .countdown {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        #timer {
+            font-weight: 600;
+            color: var(--text-main);
+            display: inline-block;
+            width: 1em;
+        }
+
+        .footer-link {
+            margin-top: 3rem;
+            font-size: 0.8rem;
+        }
+
+        a {
+            color: var(--text-muted);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        a:hover {
+            color: var(--text-main);
+            border-bottom-color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo-box">
+            <span class="status-dot"></span>
+            <span style="font-weight: 500; letter-spacing: 1px;">REDIRECTING</span>
+        </div>
+
+        <h1>站点地址已迁移</h1>
+        <p>为了提供更好的服务，我们的域名现已变更。</p>
+
+        <div class="domain-transition">
+            <span class="old-domain">taten.xyz</span>
+            <span class="arrow">→</span>
+            <span class="new-domain">taten.org</span>
+        </div>
+
+        <div class="countdown">
+            将在 <span id="timer">5</span> 秒后为您自动跳转
+        </div>
+
+        <div class="footer-link">
+            <a href="https://taten.org" id="direct-link">如果未自动跳转，请点击这里</a>
+        </div>
+    </div>
+
+    <script>
+        const targetUrl = "https://taten.org";
+        let seconds = 5;
+        const timerElement = document.getElementById('timer');
+
+        const countdown = setInterval(() => {
+            seconds--;
+            timerElement.textContent = seconds;
+            
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                window.location.href = targetUrl;
+            }
+        }, 1000);
+
+        // 点击链接时清除定时器
+        document.getElementById('direct-link').addEventListener('click', () => {
+            clearInterval(countdown);
+        });
+    </script>
+</body>
+</html>
